@@ -20,9 +20,7 @@ module Sipgate
     end
     
     def self.find_by_id(entryid)
-      get_history(entryid)
-    end
-    
+      get_history(nil, entryid)
     end
     
     private
@@ -36,7 +34,7 @@ module Sipgate
         body = JSON.parse(response.body)
         if body.has_key?('items')
           [].tap do |histories|
-            ['items'].each do |item|
+            body['items'].each do |item|
               histories << Sipgate::History.new(item)
             end
           end
@@ -45,6 +43,5 @@ module Sipgate
         end
       end
     end
-    
   end
 end
