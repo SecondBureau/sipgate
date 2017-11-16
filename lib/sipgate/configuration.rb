@@ -24,7 +24,7 @@ module Sipgate
     end
     
     def fax_filename
-      @@fax_filename ||= "FAX"
+      @@fax_filename ||= "fax.pdf"
     end
     
   end

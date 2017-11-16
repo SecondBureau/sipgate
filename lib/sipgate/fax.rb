@@ -1,6 +1,10 @@
 module Sipgate
   class Fax
     
+    class SipgateError < StandardError ; end
+      
+
+    
     attr_accessor :fax_number, :pdf, :faxline_id, :filename
     
     def initialize(params)
@@ -26,11 +30,14 @@ module Sipgate
       response = Sipgate::Connexion.conn.post do |req|
         req.url '/v1/sessions/fax'
         req.headers['Content-Type'] = 'application/json'
-        req.body = { faxlineId: faxline_id, 
-                     recipient: fax_number, 
-                     filename: filename, 
-                     base64Content: Base64.encode64(pdf)}.to_json
+        req.body = {  faxlineId: faxline_id, 
+                      recipient: fax_number, 
+                       filename: filename, 
+                  base64Content: Base64.encode64(pdf)}.to_json
       end
+      raise SipgateError, 'Sipgate returns HTTP 500' if response.status.eql?(500)
+      raise Exception     unless response.status.eql?(200)
+      JSON.parse(response.body)
     end
     
     def self.status(fax_id)

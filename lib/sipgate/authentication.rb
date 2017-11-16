@@ -40,8 +40,8 @@ module Sipgate
     
     def set_token
       raise AuthenticationError unless response.status.eql?(200)
-      @token = JSON.parse(response.body)['token']
-      @payload = JSON.parse(Base64.decode64(@token.split('.').second)).symbolize_keys!
+      @token    = JSON.parse(response.body)['token']
+      @payload  = JSON.parse(Base64.decode64(@token.split('.').second)).symbolize_keys!
     end
     
     def expired?
