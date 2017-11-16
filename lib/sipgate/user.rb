@@ -19,7 +19,7 @@ module Sipgate
     
     def self.first_user_id
       raise NoDefaultUserFoundError if all.first.nil?
-      all.first.id
+      @first_user_id ||= all.first.id
     end
     
     private
