@@ -2,8 +2,6 @@ module Sipgate
   class Fax
     
     class SipgateError < StandardError ; end
-      
-
     
     attr_accessor :fax_number, :pdf, :faxline_id, :filename
     
@@ -33,18 +31,16 @@ module Sipgate
         req.body = {  faxlineId: faxline_id, 
                       recipient: fax_number, 
                        filename: filename, 
-                  base64Content: Base64.encode64(pdf)}.to_json
+                  base64Content: Base64.strict_encode64(pdf)}.to_json
       end
       raise SipgateError, 'Sipgate returns HTTP 500' if response.status.eql?(500)
       raise Exception     unless response.status.eql?(200)
-      JSON.parse(response.body)
+      JSON.parse(response.body)['sessionId']
     end
     
     def self.status(fax_id)
-      %w[success failed working].sample.to_sym
-      
-     #https://api.sipgate.com/v1/userId/history/entryId
-     
+      history = Sipgate::History.find_by_id(fax_id)
+      history.status
     end
     
 
