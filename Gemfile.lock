@@ -3,7 +3,6 @@ PATH
   specs:
     sipgate (0.1.0)
       faraday (~> 0.13)
-      rails (~> 5.1.4)
 
 GEM
   remote: https://rubygems.org/
@@ -118,6 +117,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  rails (~> 5.1.4)
   sipgate!
   sqlite3
 
