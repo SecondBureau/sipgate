@@ -46,6 +46,8 @@ module Sipgate
         :failed
       when 'SUCCESS'
         :success
+      when 'SENDING'
+        :sending
       else
         :unknown
       end
