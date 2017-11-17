@@ -2,10 +2,10 @@ require 'sipgate/version'
 require 'sipgate/configuration'
 require 'sipgate/connexion'
 require 'sipgate/authentication'
-require 'sipgate/User'
-require 'sipgate/Faxline'
-require 'sipgate/History'
-require 'sipgate/Fax'
+require 'sipgate/user'
+require 'sipgate/faxline'
+require 'sipgate/history'
+require 'sipgate/fax'
 
 module Sipgate
   extend Sipgate::Configuration
