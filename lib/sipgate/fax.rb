@@ -44,7 +44,7 @@ module Sipgate
       case history.status
       when 'FAILED'
         :failed
-      when 'SUCCESS'
+      when 'SENT'
         :success
       when 'SENDING'
         :sending
