@@ -36,7 +36,7 @@ module Sipgate
       end
       raise SipgateError, 'Sipgate returns HTTP 500' if response.status.eql?(500)
       raise RequestError, 'Sipgate returns HTTP 400' if response.status.eql?(400)
-      raise Exception     unless response.status.eql?(200)
+      raise StandardError, "Sipgate returns HTTP #{response.status}"  unless response.status.eql?(200)
       JSON.parse(response.body)['sessionId']
     end
     
