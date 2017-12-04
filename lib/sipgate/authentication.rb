@@ -39,6 +39,7 @@ module Sipgate
     end
     
     def set_token
+      reset
       raise AuthenticationError unless response.status.eql?(200)
       @token    = JSON.parse(response.body)['token']
       @payload  = JSON.parse(Base64.decode64(@token.split('.').second)).symbolize_keys!
@@ -46,6 +47,12 @@ module Sipgate
     
     def expired?
       payload[:exp] < Time.now.to_i
+    end
+    
+    def reset
+      @token = nil
+      @payload = nil
+      @response = nil
     end
 
     
