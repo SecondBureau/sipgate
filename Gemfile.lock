@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sipgate (0.1.0)
+    sipgate (0.1.4)
       faraday (~> 0.13)
 
 GEM
