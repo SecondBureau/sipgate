@@ -17,7 +17,7 @@ module Sipgate
     end
     
     def self.auth_connexion
-      @auth_connexion ||= get_connexion(true)
+      get_connexion(true)
     end
     
     def self.get_connexion(authenticated)
