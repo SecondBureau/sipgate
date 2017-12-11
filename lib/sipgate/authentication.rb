@@ -20,12 +20,12 @@ module Sipgate
     private
     
     def username
-      Rails.logger.error "\e[31m[SWITCHY] Username not set. Check initializer\033[0m" if Sipgate.username.blank?
+      Rails.logger.error "\e[31m[SIPGATE]\033[0m Username not set. Check initializer" if Sipgate.username.blank?
       Sipgate.username
     end
     
     def password
-      Rails.logger.error "\e[31m[SWITCHY] Password not set. Check initializer\033[0m" if Sipgate.password.blank?
+      Rails.logger.error "\e[31m[SIPGATE]\033[0m Password not set. Check initializer" if Sipgate.password.blank?
       Sipgate.password
     end
     
@@ -46,10 +46,12 @@ module Sipgate
     end
     
     def expired?
+      Rails.logger.debug "\e[35m[SIPGATE]\033[0m Expired? Payload[exp]: #{payload[:exp]}, Time.now: #{Time.now.to_i} "
       payload[:exp] < Time.now.to_i
     end
     
     def reset
+      Rails.logger.info "\e[34m[SIPGATE]\033[0m Resetting"
       @token = nil
       @payload = nil
       @response = nil
