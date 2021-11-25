@@ -26,7 +26,7 @@ module Sipgate
     
     def self.get_users
       response = Sipgate::Connexion.conn.get do |req|
-        req.url '/v1/users'
+        req.url '/v2/users'
       end
       if response.status.eql?(200)
         [].tap do |users|
