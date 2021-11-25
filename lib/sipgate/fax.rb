@@ -27,7 +27,7 @@ module Sipgate
     
     def send
       response = Sipgate::Connexion.conn.post do |req|
-        req.url '/v1/sessions/fax'
+        req.url '/v2/sessions/fax'
         req.headers['Content-Type'] = 'application/json'
         req.body = {  faxlineId: faxline_id, 
                       recipient: fax_number, 

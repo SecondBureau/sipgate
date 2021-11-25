@@ -31,7 +31,7 @@ module Sipgate
     def self.get_faxlines(userid = nil)
       userid ||= default_userid
       response = Sipgate::Connexion.conn.get do |req|
-        req.url "/v1/#{userid}/faxlines"
+        req.url "/v2//#{userid}/faxlines"
       end
       if response.status.eql?(200)
         [].tap do |faxlines|

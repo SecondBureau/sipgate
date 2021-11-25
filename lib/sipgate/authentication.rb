@@ -32,7 +32,7 @@ module Sipgate
     
     def response
       @response ||= Sipgate::Connexion.conn(authenticated: false).post do |req|
-        req.url '/v1/authorization/token'
+        req.url '/v2/authorization/token'
         req.headers['Content-Type'] = 'application/json'
         req.body = {username: username, password: password}.to_json
       end

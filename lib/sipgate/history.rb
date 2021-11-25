@@ -28,7 +28,7 @@ module Sipgate
     def self.get_history(userid = nil, entryid=nil)
       userid ||= default_userid
       response = Sipgate::Connexion.conn.get do |req|
-        req.url "/v1/#{userid}/history/#{entryid}"
+        req.url "/v2//#{userid}/history/#{entryid}"
       end
       if response.status.eql?(200)
         body = JSON.parse(response.body)
