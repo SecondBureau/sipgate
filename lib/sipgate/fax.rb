@@ -43,7 +43,7 @@ module Sipgate
     def self.status(fax_id)
       history = Sipgate::History.find_by_id(fax_id)
       return :unknown if history.nil?
-      case history.status
+      case history.faxStatusType
       when 'FAILED'
         :failed
       when 'SENT'

@@ -1,7 +1,7 @@
 module Sipgate
   class History
     
-    ATTRIBUTES = [:id, :source, :target, :sourceAlias, :targetAlias, :type, :created, :lastModified, :direction, :status, :documentUrl, :reportUrl, :previewUrl].freeze
+    ATTRIBUTES = [:id, :source, :target, :sourceAlias, :targetAlias, :type, :created, :lastModified, :direction, :status, :faxStatusType, :documentUrl, :reportUrl, :previewUrl].freeze
     
     attr_accessor *ATTRIBUTES
     
@@ -20,15 +20,14 @@ module Sipgate
     end
     
     def self.find_by_id(entryid)
-      get_history(nil, entryid)
+      get_history(entryid)
     end
     
     private
     
-    def self.get_history(userid = nil, entryid=nil)
-      userid ||= default_userid
+    def self.get_history(entryid=nil)
       response = Sipgate::Connexion.conn.get do |req|
-        req.url "/v2/#{userid}/history/#{entryid}"
+        req.url "/v2/history/#{entryid}"
       end
       if response.status.eql?(200)
         body = JSON.parse(response.body)
